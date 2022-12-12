@@ -1,5 +1,5 @@
-# Generic Bootloader for AVR128Dx Family
+# Melody Bootloader Solution for AVR128DA48
 
 ## Introduction
 
-This repository contains the MPLAB X bootloader project example for AVR128DA48 device and a simple LED blinking end application project. 
+This repository contains the MPLAB X bootloader project solution for AVR128DA48 device and a simple LED blinking end application project. 
