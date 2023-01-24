@@ -50,7 +50,6 @@ pipeline {
                 stage('metadata') {
                     steps {
 			        	script {
-                            stash includes: 'AVR128DA48_App/**', name: 'projects'
 				        	execute("pip install jsonschema")
 					        execute("git clone https://bitbucket.microchip.com/scm/citd/metadata-schema.git")
 			    		    execute("git clone https://bitbucket.microchip.com/scm/citd/tool-metadata-validator.git")
@@ -74,7 +73,6 @@ pipeline {
                 stage('Build') {
                     steps {
                         script {
-                            unstash 'projects'
                             // Install xml2js dependency needed by the tool-mplabx-c-build scripts
                             execute("npm i xml2js")
                             execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-build.git")
