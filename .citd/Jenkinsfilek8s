@@ -81,7 +81,7 @@ pipeline {
 					zipFirmwareArtifact("AVR128DA48_BL.X/dist/XC8/production", "XC8")
 					stash includes: "${BUILD_FOLDER}/${env.ARTIFACTORY_MODULE}-XC8.zip", name: 'artifacts-xc8'
 				}
-				archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", allowEmptyArchive: true, fingerprint: true
+				
 			}
 				
 		}
@@ -90,6 +90,7 @@ pipeline {
      post {
         always {
             archiveArtifacts artifacts: "xc8_output/**,gcc_output/**", allowEmptyArchive:true, fingerprint: true
+            archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", allowEmptyArchive: true, fingerprint: true
         }
         success{
             script {
