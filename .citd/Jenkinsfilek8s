@@ -2,11 +2,11 @@
 
 pipeline {
     agent {
-                kubernetes {
-                    defaultContainer 'avr128da48-cnano-bootloader-melody-xc8-mplabx'
-                    yamlFile '.citd/cloudprovider.yml'
-                }
-            }
+		kubernetes {
+			defaultContainer 'avr128da48-cnano-bootloader-melody-xc8-mplabx'
+			yamlFile '.citd/cloudprovider.yml'
+		}
+	}
 
     environment {
         GITHUB_OWNER = 'microchip-pic-avr-solutions'
@@ -42,51 +42,51 @@ pipeline {
     }
 
     stages {
-                stage('Checkout') {
-                    steps {
-                        checkout scm
-                    }
-                }
-                stage('metadata') {
-                    steps {
-			        	script {
-				        	execute("pip install jsonschema")
-					        execute("git clone https://bitbucket.microchip.com/scm/citd/metadata-schema.git")
-			    		    execute("git clone https://bitbucket.microchip.com/scm/citd/tool-metadata-validator.git")
-				    	    execute("cd tool-metadata-validator && python metadata-validator.py -data '../.main-meta/main.json' -schema '../metadata-schema/main-schema.json'")
-				        }
-                    }
-                }
-                stage('Pre-build') {
-			        steps {
-				        script {
-                            MPLABX_PATH= sh (script: 'update-alternatives --list MPLABX_PATH',returnStdout: true).trim()
-                            COMPILER_PATH= sh (script: 'update-alternatives --list XC8_PATH',returnStdout: true).trim()
-                            def pDir = "${MPLABX_PATH}/packs"
-                            def ver = COMPILER_PATH.split('/')[4].substring(1)
-
-                            execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-project-generator.git")
-                            execute("cd tool-mplabx-c-project-generator && node configGenerator.js sp=../ v8=${ver} packs=${pDir}")
-                        }
-                    }
-                }
-                stage('Build') {
-                    steps {
-                        script {
-                            // Install xml2js dependency needed by the tool-mplabx-c-build scripts
-                            execute("npm i xml2js")
-                            execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-build.git")
-                            execute("cd tool-mplabx-c-build && node buildLauncher.js sp=../ rp=./output genMK=true")
-                            // Store build artifacts for later publishing to Artifactory
-                            zipFirmwareArtifact("AVR128DA48_BL.X/dist/XC8/production", "XC8")
-                            stash includes: "${BUILD_FOLDER}/${env.ARTIFACTORY_MODULE}-XC8.zip", name: 'artifacts-xc8'
-                        }
-                        archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", allowEmptyArchive: true, fingerprint: true
-                    }
-                        
-                }
+		stage('Checkout') {
+			steps {
+				checkout scm
 			}
-    }
+		}
+		stage('metadata') {
+			steps {
+				script {
+					execute("pip install jsonschema")
+					execute("git clone https://bitbucket.microchip.com/scm/citd/metadata-schema.git")
+					execute("git clone https://bitbucket.microchip.com/scm/citd/tool-metadata-validator.git")
+					execute("cd tool-metadata-validator && python metadata-validator.py -data '../.main-meta/main.json' -schema '../metadata-schema/main-schema.json'")
+				}
+			}
+		}
+		stage('Pre-build') {
+			steps {
+				script {
+					MPLABX_PATH= sh (script: 'update-alternatives --list MPLABX_PATH',returnStdout: true).trim()
+					COMPILER_PATH= sh (script: 'update-alternatives --list XC8_PATH',returnStdout: true).trim()
+					def pDir = "${MPLABX_PATH}/packs"
+					def ver = COMPILER_PATH.split('/')[4].substring(1)
+
+					execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-project-generator.git")
+					execute("cd tool-mplabx-c-project-generator && node configGenerator.js sp=../ v8=${ver} packs=${pDir}")
+				}
+			}
+		}
+		stage('Build') {
+			steps {
+				script {
+					// Install xml2js dependency needed by the tool-mplabx-c-build scripts
+					execute("npm i xml2js")
+					execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-build.git")
+					execute("cd tool-mplabx-c-build && node buildLauncher.js sp=../ rp=./output genMK=true")
+					// Store build artifacts for later publishing to Artifactory
+					zipFirmwareArtifact("AVR128DA48_BL.X/dist/XC8/production", "XC8")
+					stash includes: "${BUILD_FOLDER}/${env.ARTIFACTORY_MODULE}-XC8.zip", name: 'artifacts-xc8'
+				}
+				archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", allowEmptyArchive: true, fingerprint: true
+			}
+				
+		}
+	}
+
      post {
         always {
             archiveArtifacts artifacts: "xc8_output/**,gcc_output/**", allowEmptyArchive:true, fingerprint: true
@@ -117,6 +117,7 @@ pipeline {
 				 }
             }
         }
+	}
 }
 
 def execute(String cmd) {
