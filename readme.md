@@ -158,6 +158,8 @@ Checksum, CRC16, CRC32 and Offset (Reset Vector and Status Flag) verification sc
   * CRC16 - postBuildCRC${ShExtension} CRC16 ${ImagePath}
   * CRC32 - postBuildCRC${ShExtension} CRC32 ${ImagePath}
 
+  Note: Make sure to enable the "Execute this line after build" checkbox to enable the execution of the Post Build Script.
+
   ![Post build script project properties](Images/Postbuild_scripts_project_properties.PNG)
 
 
