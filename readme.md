@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This repository contains the MPLAB X bootloader project solution for AVR128DA48 device and a simple LED blinking end application project. The bootloader will be programmed into the microcontroller using MPLAB X IDE and the end application will be programmed using UBHA ([Unified Bootloader Host Application](https://www.microchip.com/en-us/tools-resources/develop/libraries/microchip-bootloaders/8-bit)).
+This example uses the 8-bit Melody Bootloader library to show how to configure the bootloader on AVR128DA48 along with a simple LED blinking end application project. The bootloader will be programmed into the microcontroller using MPLAB X IDE and the end application will be programmed using UBHA ([Unified Bootloader Host Application](https://www.microchip.com/en-us/tools-resources/develop/libraries/microchip-bootloaders/8-bit)).
 
 ## Hardware Tools
 
@@ -39,7 +39,7 @@ This repository contains the MPLAB X bootloader project solution for AVR128DA48 
 
 ## Setup
 
-The AVR128DA48 Curiosity Nano Develpment Board is used as test platform. Connect the device to the PC using the USB cable before proceeding on working with the project.   
+The AVR128DA48 Curiosity Nano Develpment Board is used as test platform. To setup the board, connect the device to the PC using the USB cable before proceeding on working with the project.   
 ![AVR128DA48 Curiosity Nano Develpment Board](Images/AVR128DA48%20Curiosity%20Nano.png)
 
 
@@ -54,7 +54,7 @@ The AVR128DA48 Curiosity Nano Develpment Board is used as test platform. Connect
   3. Open CLKCTRL from System module in the Project Resources tab. Make sure the Clock source is configured. In general, faster is better for more reliable communication.   
     ![Clock Setting for AVR](Images/ClockSetting.PNG)
 
-  4. Open Bootloader8-bit driver under Libraries section in Project Resources. If the Bootloader driver is not available in the Project Resources, add it to the project by double clicking on it under Device Resources. Select UART1 from the UART Selector drop-down list. If you cannot see the Bootloader module in the Device Resources, navigate to the library release notes and follow the steps located in the Installing MCC Melody Bootloader 8-Bit Library section.  
+  4. Open Bootloader8-bit driver under Libraries section in Project Resources. If the Bootloader driver is not available in the Project Resources, add it to the project by double clicking on it under Device Resources. If you cannot see the Bootloader module in the Device Resources, navigate to the library release notes and follow the steps located in the Installing MCC Melody Bootloader 8-Bit Library section.  
     ![Bootloader UART Slection](Images/Bootloader%20UART%20Selection.PNG) 
   
   5. Open UART module and make sure USART1 is selected in UART PLIB Selector drop-down list.  
@@ -70,15 +70,17 @@ The AVR128DA48 Curiosity Nano Develpment Board is used as test platform. Connect
     ![Config Bit Setting](Images/Configuration_Bits.PNG)
 
   9. The BOOTSIZE defined here is the number of pages in the flash. AVR128DA48 has a total 256 pages each being 512Bytes in size as shown below.
-  
-      Program Memory Size = Total Pages x Page Size = 100h(256) x 200h(512) bytes = 0x20000 bytes
-      Config bits = 20h(32)
-      Bootloader Area/Offset = No. of Pages x Page Size = 20h(32) x 200h(512) = 0x4000 bytes
-      End Application Space = Program Memory Size - Bootloader Area = 0x20000 - 0x4000 = 0x1C000 bytes
+      | Memory Region          | Formula to calculate                  | Memory Size                                 |
+      | ---------------------- | ------------------------------------- | ------------------------------------------- |
+      | Program Memory Size    | Total Pages x Page Size               | 100h(256) x 200h(512) bytes = 0x20000 bytes |
+      | Config bits            |                                       | 20h(32)                                     |
+      | Bootloader Area/Offset | No. of Pages x Page Size              | 20h(32) x 200h(512) = 0x4000 bytes          | 
+      | End Application Space  | Program Memory Size - Bootloader Area | 0x20000 - 0x4000 = 0x1C000 bytes            |
 
     Make note of this value. We will later use these values in the linker settings of the application project.
 
-    Physical properties of the flash memory are as follows     
+    Physical properties of the flash memory are as follows    
+ 
   ![Physical Properties of Flash Memory](Images/Physical_Properties_Flash_Memory.png)
   
   10. Open Delay driver from Timer module in the Project Resources tab. Generate delay driver is ON by default.  
@@ -90,7 +92,7 @@ The AVR128DA48 Curiosity Nano Develpment Board is used as test platform. Connect
   12. Open the Pin Grid View. PC6 is used for the Bootloader Indication pin (output), PC7 is the Bootloader Entry pin (input), UART Tx and Rx are on PC0 and PC1. Select the Pin Module from the project resources, System option. Pins are configured to digital by deselecting the analog check box option for all the pins used. Make sure pull-up is enabled for RX and TX.  
   ![Pin Settings for AVR Bootloader](Images/Pin_Settings.png)
 
-  13. Press 'Generate Button' to generate the project code. Make sure the generation is completed successfully.  
+  13. Press 'Generate' to generate the project code. Make sure the generation is completed successfully.  
     ![Generate Code](Images/Generate%20Code.png)
 
   14. Next step is to configure the project properties. This can be opened by selecting "File->Project Properties". Select "AVR128DA48 Curiosity Nano" under Connected Hardware Tool, DFP version under Packs and the XC8 or AVR-GCC version under compiler toolchain. Also select the XC8 or GCC under Categories section based on the compiler selected.  
@@ -98,8 +100,7 @@ The AVR128DA48 Curiosity Nano Develpment Board is used as test platform. Connect
 
   15. We have completed the needed configurations for the Bootloader project. Compile and build the project by clicking the Clean and Build Main Project button on the toolbar.  
   ![Clean and Build Main Project](Images/Clean%20and%20Build%20Project.png)
-
-  16. Program the device by clicking "Make and Program Device Main Project" button on the toolbar. Once the bootloader is programmed into the device sucessfully, you should see the device LED ON.  
+  16. Program the device by clicking "Make and Program Device Main Project" on the toolbar. Once the bootloader is programmed into the device sucessfully, you should see the device LED ON.  
   ![Program Device with Bootloader](Images/Program_Device_Bootloader.PNG)
 
 
@@ -113,12 +114,12 @@ The end application really depends on what the customer wants the microcontrolle
   2.  Open MCC from the toolbar.  
     ![MPLAB Code Configurator](Images/Opening%20MCC.png)
   
-  3. Open CLKCTRL from System module in the Project Resources tab. Make sure the Clock source is configured. In general, faster is better for more reliable communication.  
+  3. Open CLKCTRL from System module in the Project Resources tab. Make sure the Clock bits are configured to the settings observed in the bootloader. This will help during testing to prevent the configuration bits from causing a Checksum mismatch with UBHA.   
 
   4. On-board LED is configured by setting PC6 as output pin.  
     ![Pin Configuration for AVR](Images/Pin_Module_Application.png)
 
-  5. Press 'Generate Button' to generate the project code. Make sure the generation is completed successfully.
+  5. Press 'Generate' to generate the project code. Make sure the generation is completed successfully.
 
   6. For a blinking LED application, the following code is added to main.c in Source Files under the project folder. The delay.h header file must also be included in the main file.     
    ![LED Blink Code](Images/led_blink_code.PNG)
@@ -132,10 +133,9 @@ The end application really depends on what the customer wants the microcontrolle
 
   10. The application HEX can be loaded on the microcontroller through Microchip's Unified Bootloader Host Application(UBHA).
 
-
 ## Compiler and Linker Settings
 
-The following section is intended to provide an explanation of the compiler and linker settings utilized in the MCU8 example Application project. These settings are already established in the examples, this is simply here to provide a depth of understanding.
+The following section is intended to provide an explanation of the compiler and linker settings utilized in the PIC18F57Q43 Application project. These settings are already configured in the examples, this is simply here to provide a depth of understanding and to provide help incase you want to try setting a new size.
 
 Checksum, CRC16, CRC32 and Offset (Reset Vector and Status Flag) verification schemes are supported by the Bootloader library. The example below uses Checksum verification scheme for demonstration. For more details, refer Melody Bootloader User's Guide.
 
