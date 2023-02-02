@@ -1,15 +1,11 @@
 /**
- * utils Header File
- * 
- * @file system.h
- * 
- * @defgroup doc_driver_utils AVR Code utility functions
- *
- * @brief This file contains the compiler abstraction layer and code utilities for AVR.This module provides various abstraction layers and utilities to make code compatible between different compilers.
- *
- * @version Driver Version 1.0.1
- * \{
- *
+  @Company
+    Microchip Technology Inc.
+
+  @Description
+    This Source file provides APIs.
+    Generation Information :
+    Driver Version    :   1.0.0
 */
 /*
 © [2023] Microchip Technology Inc. and its subsidiaries.
@@ -32,6 +28,17 @@
     THIS SOFTWARE.
 */
 
+
+/**
+ * \defgroup doc_driver_utils AVR Code utility functions
+ *
+ * Compiler abstraction layer and code utilities for AVR.
+ * This module provides various abstraction layers and utilities
+ * to make code compatible between different compilers.
+ *
+ * \{
+ */
+
 #ifndef UTILS_H_INCLUDED
 #define UTILS_H_INCLUDED
 
@@ -40,7 +47,7 @@ extern "C" {
 #endif
 
 /**
- * @brief Retrieve array size
+ * \brief Retrieve array size
  */
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 

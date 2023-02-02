@@ -5,7 +5,7 @@
  * 
  * @defgroup systemdriver System Driver
  * 
- * @brief This file contains the API prototypes for the System driver.
+ * @brief This is the generated header file for the System Driver.
  *
  * @version Driver Version 1.0.1
 */
@@ -42,7 +42,7 @@ extern "C" {
   Section: Included Files
 */
 #include "../system/utils/compiler.h"
-#include "config_bits.h"
+#include "../system/clock.h"
 #include "../system/clock.h"
 #include "../system/pins.h"
 #include "../nvm/nvm.h"
@@ -51,9 +51,10 @@ extern "C" {
 #include "../bootloader/bl_bootload.h"
 /**
  * @ingroup systemdriver
- * @brief Initializes the system module. This routine must be called only once during the system initialization and before any other routine is called.
- * @param None.
- * @return None.
+ * @brief This initializes the system module and must be called before any other API is called.
+ * This routine should only be called once during system initialization.
+ * @param None
+ * @return None
 */
 void SYSTEM_Initialize(void);
 

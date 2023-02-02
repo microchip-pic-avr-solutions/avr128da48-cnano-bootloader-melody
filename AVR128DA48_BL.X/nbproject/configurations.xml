@@ -31,7 +31,6 @@
           <itemPath>mcc_generated_files/system/interrupt.h</itemPath>
           <itemPath>mcc_generated_files/system/pins.h</itemPath>
           <itemPath>mcc_generated_files/system/port.h</itemPath>
-          <itemPath>mcc_generated_files/system/config_bits.h</itemPath>
           <itemPath>mcc_generated_files/system/protected_io.h</itemPath>
           <itemPath>mcc_generated_files/system/ccp.h</itemPath>
           <itemPath>mcc_generated_files/system/clock.h</itemPath>
@@ -322,8 +321,6 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-ffff"/>
         <property key="poweroptions.powerenable" value="false"/>
-        <property key="programmerToGoFilePath"
-                  value="C:/Users/C51866/Documents/Github/avr128da48-cnano-bootloader-melody/AVR128DA48_BL.X/debug/XC8/AVR128DA48_BL_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"
@@ -556,8 +553,6 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-ffff"/>
         <property key="poweroptions.powerenable" value="false"/>
-        <property key="programmerToGoFilePath"
-                  value="C:/Users/C51866/Documents/Github/avr128da48-cnano-bootloader-melody/AVR128DA48_BL.X/debug/GCC/AVR128DA48_BL_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"

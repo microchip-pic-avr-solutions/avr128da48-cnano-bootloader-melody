@@ -5,7 +5,7 @@
  * 
  * @ingroup systemdriver
  * 
- * @brief This file contains the API implementation for the System driver.
+ * @brief This is the generated driver implementation file for the System Driver.
  *
  * @version Driver Version 1.0.1
 */
@@ -34,6 +34,10 @@
    Section: Included Files
  */
 #include "../system.h"
+
+/**
+ * Initializes MCU, drivers and middleware in the project
+**/
 
 
 void SYSTEM_Initialize(void)

@@ -5,9 +5,9 @@
  * 
  * @ingroup config_bitsdriver
  * 
- * @brief This file contains the generated Device Configuration Bits file.
+ * @brief This is the generated Device Configuration Bits file.
  *
- * @version Driver Version 1.0.2
+ * @version Driver Version 1.0.1
 */
 /*
 © [2023] Microchip Technology Inc. and its subsidiaries.

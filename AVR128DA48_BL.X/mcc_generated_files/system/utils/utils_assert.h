@@ -1,13 +1,11 @@
 /**
- * utils_assert Header File
- * 
- * @file utils_assert.h
- * 
- * @defgroup doc_driver_utils_assert Functionality for assert
- *
- * @brief This file contains the generated utils_assert header file for the configuration bits driver.
- *
- * @version Driver Version 1.0.1
+  @Company
+    Microchip Technology Inc.
+
+  @Description
+    This Source file provides APIs.
+    Generation Information :
+    Driver Version    :   1.0.0
 */
 /*
 © [2023] Microchip Technology Inc. and its subsidiaries.
@@ -30,6 +28,14 @@
     THIS SOFTWARE.
 */
 
+
+/**
+ * \defgroup doc_driver_utils_assert Functionality for assert.
+ * \ingroup doc_driver_utils
+ *
+ * \{
+ */
+
 #ifndef _ASSERT_H_INCLUDED
 #define _ASSERT_H_INCLUDED
 
@@ -40,9 +46,13 @@ extern "C" {
 #include <stdbool.h>
 
 /**
- * @brief Assert macro
- * Macro used to throw asserts. It can be mapped to different function based on debug level.
- * @param[in] condition A condition to be checked; assert is thrown if the given condition is false.
+ * \brief Assert macro
+ *
+ * This macro is used to throw asserts. It can be mapped to different function
+ * based on debug level.
+ *
+ * \param[in] condition A condition to be checked;
+ *                      assert is thrown if the given condition is false
  */
 
 #ifdef DEBUG

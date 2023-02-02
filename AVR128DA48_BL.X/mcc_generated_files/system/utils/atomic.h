@@ -1,13 +1,11 @@
 /**
- * CONFIGURATION BITS Generated Atomic Header File
- * 
- * @file atomic.h
- * 
- * @defgroup doc_driver_utils_atomic Atomic memory access and critical sections
- * 
- * @brief This file contains the atomic memory access and critical sections header file for the configuration bits driver.
- *
- * @version Driver Version 1.0.0
+  @Company
+    Microchip Technology Inc.
+
+  @Description
+    This Source file provides APIs.
+    Generation Information :
+    Driver Version    :   1.0.0
 */
 /*
 © [2023] Microchip Technology Inc. and its subsidiaries.
@@ -34,16 +32,35 @@
 #ifndef ATOMIC_H
 #define ATOMIC_H
 
+/**
+ * \defgroup doc_driver_utils_atomic Atomic memory access and critical sections
+ * \ingroup doc_driver_utils
+ *
+ * Atomic memory access and critical sections
+ *
+ * \{
+ */
+
 /* clang-format off */
 
 #if defined(__GNUC__) || defined (__DOXYGEN__)
 
 /**
- * @brief Enters critical region. Saves the contents of the status register, including the Global Interrupt Enable bit, so that it can be restored upon leaving the critical region.
- * Thereafter, clears the Global Interrupt Enable Bit.This macro takes a parameter P that is unused for the GCC compiler,but necessary for code compatibility with the IAR compiler.
- * The IAR compiler declares a variable with the name of the parameter forholding the SREG value.
- * Compilation will fail when the variable declared in the macro is not unique within the scope that the critical region is declared within.
- * @param[in] UNUSED(GCC)/P(IAR) Name of variable storing SREG.
+ * \brief Enter a critical region
+ * 
+ * Saves the contents of the status register, including the Global 
+ * Interrupt Enable bit, so that it can be restored upon leaving the 
+ * critical region. Thereafter, clears the Global Interrupt Enable Bit.
+ * This macro takes a parameter P that is unused for the GCC compiler,
+ * but necessary for code compatibility with the IAR compiler. The IAR
+ * compiler declares a variable with the name of the parameter for
+ * holding the SREG value. Since a variable is declared in the macro,
+ * this variable must have a name that is unique within the scope
+ * that the critical region is declared within, otherwise compilation 
+ * will fail.
+ *
+ * \param[in] UNUSED(GCC)/P(IAR) Name of variable storing SREG
+ *
  */
 
 #define ENTER_CRITICAL(UNUSED) __asm__ __volatile__ (   \
@@ -54,11 +71,18 @@
    )
 
 /**
- * @brief Exits a critical region. Restores the contents of the status register, including the Global Interrupt Enable bit, as it was when entering the critical region.
- * This macro takes a parameter P that is unused for the GCC compiler, but necessary for code compatibility with the IAR compiler.
- * The IAR compiler uses this parameter as the name of a variable that holds the SREG value.
- * The parameter must be identical to the parameter used in the corresponding ENTER_CRITICAL().
- * @param[in] UNUSED(GCC)/P(IAR) Name of variable storing SREG
+ * \brief Exit a critical region
+ * 
+ * Restores the contents of the status register, including the Global 
+ * Interrupt Enable bit, as it was when entering the critical region.
+ * This macro takes a parameter P that is unused for the GCC compiler,
+ * but necessary for code compatibility with the IAR compiler. The IAR
+ * compiler uses this parameter as the name of a variable that holds 
+ * the SREG value. The parameter must be identical to the parameter 
+ * used in the corresponding ENTER_CRITICAL().
+ *
+ * \param[in] UNUSED(GCC)/P(IAR) Name of variable storing SREG
+ *
  */
 
 #define EXIT_CRITICAL(UNUSED)  __asm__ __volatile__ (   \
