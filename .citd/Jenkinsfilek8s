@@ -81,9 +81,7 @@ pipeline {
 					zipFirmwareArtifact("AVR128DA48_BL.X/dist/XC8/production", "XC8")
 					stash includes: "${BUILD_FOLDER}/${env.ARTIFACTORY_MODULE}-XC8.zip", name: 'artifacts-xc8'
 				}
-				
-			}
-				
+			}	
 		}
         stage('GitHub-Deploy') {
             when {
@@ -177,14 +175,11 @@ pipeline {
                         echo "Tag name is not equal to metadata content version."
                         execute("exit 1")
                     }
-
                 }
             }
-        }
-			
+        }	
 	}
-
-     post {
+    post {
         always {
             archiveArtifacts artifacts: "xc8_output/**,gcc_output/**", allowEmptyArchive:true, fingerprint: true
             archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", allowEmptyArchive: true, fingerprint: true
