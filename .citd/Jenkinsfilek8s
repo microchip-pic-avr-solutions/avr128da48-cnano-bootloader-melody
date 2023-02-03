@@ -32,7 +32,7 @@ pipeline {
 
     parameters {
         string( name: 'NOTIFICATION_EMAIL',
-                defaultValue: 'sukanya.palanisami@microchip.com',
+                defaultValue: 'LibraryDevTeam_MCU8@microchip.com',
                 description: "Email to send build failure and fixed notifications.")
     }
 
