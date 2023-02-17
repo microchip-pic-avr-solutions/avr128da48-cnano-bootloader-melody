@@ -100,7 +100,7 @@ The AVR128DA48 Curiosity Nano Develpment board is used as the test platform. To 
   15. Now that the needed configurations for the Bootloader project are done, compile and build the project by clicking the **Clean and Build Main Project** icon on the toolbar.    
   ![Clean and Build Main Project](Images/Clean%20and%20Build%20Project.png)
 
-  16. Program the device by clicking the "Make and Program Device Main Project" on the toolbar. Once the bootloader is programmed into the device sucessfully, the device LED will be ON.  
+  16. Program the device by clicking the **Make and Program Device Main Project** icon on the toolbar. Once the bootloader is programmed into the device sucessfully, the device LED will be ON.  
   ![Program Device with Bootloader](Images/Program_Device_Bootloader.PNG)
 
 
