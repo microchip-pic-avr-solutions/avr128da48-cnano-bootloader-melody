@@ -164,7 +164,7 @@ Checksum, CRC16, CRC32 and Offset (Reset Vector and Status Flag) verification sc
 
 The Unified Bootloader Host Application (UBHA) is a Java utility that was created to simplify the development and testing process for anyone configuring our basic bootloader. You will more than likely be writing your own host to interface with your specific bootloader firmware but the UBHA will help you get started with the basic bootloader firmware present in the Melody 8-bit Bootloader Library.
 
-The application her file is loaded in the controller using Microchip's Unified Bootloader Host Application. Before programming the controller with the application hex file, make sure the controller is programmed with the bootloader. 
+The application hex file is loaded in the controller using Microchip's Unified Bootloader Host Application. Before programming the controller with the application hex file, make sure the controller is programmed with the bootloader. 
 
  Follow the steps below to load a new firmware image onto the device:
 
