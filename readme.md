@@ -169,7 +169,7 @@ The application hex file is loaded in the controller using Microchip's Unified B
  Follow the steps below to load a new firmware image onto the device:
 
    1. Download and launch the UBHA.   
-   ![GUI of UBHA](Images/UBHA.png)
+   ![GUI of UBHA](Images/UBHA.PNG)
 
    2. The COM port for the AVR128DA48 Curiosity Nano board can be found within the Device Manager.  
    ![Curiosity Nano COM Port](Images/COM_Port_Number.png)
